@@ -11,25 +11,11 @@ class Session
         @session_talks = []
         # scheduler method(talk_list)/
     end
-
-    def add_talks_to_session talks_list
-        sorted_talks_list = talks_list.sort_by(&:duration)
-        for i in sorted_talks_list
-            if @available_time_mins >= sorted_talks_list[i].duration
-                sorted_talks_list[i] << @session_talks
-                @available_time_mins -= sorted_talks_list[i].duration
-            else break
-            end     
-        end
-    end
-
 end
 
 
 
 
 
-# main
-track1 = session.new talk_list
-track2 = session.new talk_list
+
 
