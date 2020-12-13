@@ -1,6 +1,8 @@
 class Talk
-    def initialize(topic,duration)
-        @topic = topic
-        @duration = duration
-    end
+  attr_reader :topic, :duration
+
+  def initialize(topic, duration)
+    @topic = topic
+    @duration = duration
+  end
 end
