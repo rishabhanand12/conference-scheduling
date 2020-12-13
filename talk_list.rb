@@ -1,3 +1,5 @@
+require_relative "talk"
+
 module TalkList 
   Talks = [
     Talk.new("Pryin open the black box", 60),
@@ -17,10 +19,8 @@ module TalkList
     Talk.new("How to talk to humans: a different approach to soft skills", 30),
     Talk.new("Getting a handle on Legacy Code", 60),
     Talk.new("Heroku: A year in review", 30),
-    Talk.new("Ruby on Rails on Minitest", 30)
-  ]
-  LightningTalks = [
+    Talk.new("Ruby on Rails on Minitest", 30),
     Talk.new("Riding Rails for 10 years", 5),
-    Talk.new("Ansible : An alternative to chef", 5),
+    Talk.new("Ansible : An alternative to chef", 5)
   ]
 end

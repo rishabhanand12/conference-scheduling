@@ -2,25 +2,25 @@ require_relative "track"
 
 class Conference 
   def initialize 
-    # @track_1 = Track.new(1)
-    # @track_2 = Track.new(2)
-    # @sessions = [@track_1.morning_session, @track_1.evening_session, @track_2.morning_session, @track_2.evening_session]
     @tracks = []
     @unscheduled_talks = []
   end
 
+  def create_tracks (num)
+    num.times do |i|
+      @tracks << Track.new(i+1)
+    end
+  end
+
   def prepare_schedule (talk_list)
-    track_1 = Track.new(1)
-    track_2 = Track.new(2)
-    @tracks.push(track_1, track_2)
-    sessions = [@track_1.morning_session, @track_1.evening_session, @track_2.morning_session, @track_2.evening_session]
-    index = 0
-    @unscheduled_talks = talk_list
+    @unscheduled_talks = talk_list.sort_by(&:duration)
     while(!@unscheduled_talks.empty?) 
-      @unscheduled_talks = sessions[index].add_talks_to_session (@unscheduled_talks)
-      index += 1
-      if(index > sessions.length-1)
-        break
+      @tracks.each do |track|
+        @unscheduled_talks = track.morning_session.add_talks_to_session(@unscheduled_talks)
+        @unscheduled_talks = track.evening_session.add_talks_to_session(@unscheduled_talks)
+        if(@unscheduled_talks.empty?) 
+          break
+        end
       end
     end
   end
@@ -28,16 +28,10 @@ class Conference
   def show_itinerary
     result = ""
     @tracks.each do |track| 
+      puts track.number
       result += "Track #{track.number} \n"
-      track.sessions.each do |session|
-        if !session.talks.empty? 
-          talks.each do |talk|
-            time = session.start_time
-            result += "#{session.time.hour}: #{session.time.min} talk.topic \n" 
-            time += talk.duration * 60
-          end
-      end 
+      result += track.get_schedule
     end
+    puts result
   end
-  puts result
 end
