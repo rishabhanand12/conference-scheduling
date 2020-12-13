@@ -1,21 +1,24 @@
 class Session
-    attr_reader : available_time_mins
-    def initialize 
-        @start_time = Time.new(2020,12,10,9,0,0)
-        @end_time = Time.new(2020,12,10,16,59,59)
-        @break_start = Time.new(2020,12,10,13,0,0)
-        @break_end = Time.new(2020,12,10,14,0,0)
-        @session_duration_mins = (@end_time - @start_time) / 60
-        @break_duration_mins = (@break_end - @break_start) / 60
-        @available_time_mins = @session_duration_mins - @break_duration_mins
-        @session_talks = []
-        # scheduler method(talk_list)/
+    attr_reader :talks, :start_time
+  
+    def initialize(start_time, end_time)
+      @start_time = Time.new(2020,12,11,start_time,0,0)
+      @end_time = Time.new(2020,12,11,end_time,0,0)
+      @duration_in_mins = (@start_time-@end_time) / 60
+      @talks = []
     end
-end
-
-
-
-
-
-
-
+  
+    def add_talks_to_session (talk_list)
+      time_remaining = @duration
+      while(!talk_list.empty?)
+        if(talk_list.first.duration > time_remaining) 
+          break
+        else 
+          talks << talk_list[i]
+          time_remaining -= talk_list.first.duration
+          talk_list.delete(talk_list.first)
+        end
+      end
+      return talk_list
+    end
+  end
