@@ -32,5 +32,14 @@ class Conference
       result += track.get_schedule
     end
     puts result
+    show_unscheduled_talks
   end
+
+  def show_unscheduled_talks
+    if (!@unscheduled_talks.empty?) 
+      @unscheduled_talks.each |talk|
+      puts talk.topic
+    end
+  end
+
 end
