@@ -14,7 +14,7 @@ class Track
     result = ""
     @sessions.each do |session|
       result += "#{session.name} session \n"
-      result += session.get_talks_for_session
+      result += session.get_talks_for_session + "\n"
     end
     return result
   end

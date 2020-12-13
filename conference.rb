@@ -28,7 +28,6 @@ class Conference
   def show_itinerary
     result = ""
     @tracks.each do |track| 
-      puts track.number
       result += "Track #{track.number} \n"
       result += track.get_schedule
     end
